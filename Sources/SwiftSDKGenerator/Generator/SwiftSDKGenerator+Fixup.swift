@@ -87,8 +87,15 @@ extension SwiftSDKGenerator {
   }
 
   func symlinkClangHeaders() throws {
+    let symlinkPath = self.pathsConfiguration.toolchainDirPath.appending("usr/lib/swift_static/clang")
+
+    // Remove existing clang symlink
+    if self.doesFileExist(at: symlinkPath) {
+      try self.removeFile(at: symlinkPath)
+    }
+
     try self.createSymlink(
-      at: self.pathsConfiguration.toolchainDirPath.appending("usr/lib/swift_static/clang"),
+      at: symlinkPath,
       pointingTo: "../swift/clang"
     )
   }
