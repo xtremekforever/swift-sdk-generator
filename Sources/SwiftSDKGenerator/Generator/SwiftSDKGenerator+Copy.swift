@@ -93,12 +93,12 @@ extension SwiftSDKGenerator {
     logGenerationStep("Copying Swift core libraries for the target triple into Swift SDK bundle...")
 
     for (pathWithinPackage, pathWithinSwiftSDK) in [
-      ("swift/linux", pathsConfiguration.toolchainDirPath.appending("usr/lib/swift")),
-      ("swift_static/linux", pathsConfiguration.toolchainDirPath.appending("usr/lib/swift_static")),
-      ("swift_static/shims", pathsConfiguration.toolchainDirPath.appending("usr/lib/swift_static")),
-      ("swift/dispatch", sdkDirPath.appending("usr/include")),
-      ("swift/os", sdkDirPath.appending("usr/include")),
-      ("swift/CoreFoundation", sdkDirPath.appending("usr/include")),
+      ("swift/linux", sdkDirPath.appending("usr/lib/swift")),
+      ("swift_static/linux", sdkDirPath.appending("usr/lib/swift_static")),
+      ("swift_static/shims", sdkDirPath.appending("usr/lib/swift_static")),
+      //("swift/dispatch", sdkDirPath.appending("usr/include")),
+      //("swift/os", sdkDirPath.appending("usr/include")),
+      //("swift/CoreFoundation", sdkDirPath.appending("usr/include")),
     ] {
       try await rsync(from: distributionPath.appending(pathWithinPackage), to: pathWithinSwiftSDK)
     }
